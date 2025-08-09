@@ -89,7 +89,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/credit-risk-repo:latest
+          IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/credit-risk-flask:latest
           docker build -t $IMAGE_URI .
           docker push $IMAGE_URI
 
