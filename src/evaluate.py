@@ -5,6 +5,7 @@ import joblib
 STAGED_DATA_PATH = "data/staged/data.csv"
 MODEL_PATH = "models/model.pkl"
 
+
 def main():
     # Load data
     df = pd.read_csv(STAGED_DATA_PATH)
@@ -25,6 +26,7 @@ def main():
 
     print(f"[INFO] Accuracy: {acc:.4f}")
     print(f"[INFO] ROC-AUC: {auc:.4f}")
+
 
 if __name__ == "__main__":
     main()

@@ -12,6 +12,7 @@ MODEL_DIR = "model"
 MODEL_PKL_PATH = "models/model.pkl"
 MODEL_JOBLIB_PATH = os.path.join(MODEL_DIR, "model.joblib")
 
+
 def main(sample_size=None):
     os.makedirs("models", exist_ok=True)
     os.makedirs(MODEL_DIR, exist_ok=True)
@@ -37,8 +38,8 @@ def main(sample_size=None):
 
     # Hyperparameter grid search
     param_grid = {
-        "n_estimators": [100, 200] if not sample_size else [50],  # smaller for CI
-        "max_depth": [None, 10, 20] if not sample_size else [10]
+        "n_estimators": [100, 200] if not sample_size else [50],
+        "max_depth": [None, 10, 20] if not sample_size else [10],
     }
     clf = GridSearchCV(RandomForestClassifier(random_state=42), param_grid, cv=3)
     clf.fit(X_train, y_train)
@@ -64,8 +65,14 @@ def main(sample_size=None):
     subprocess.run(["aws", "s3", "cp", tar_path, s3_uri], check=True)
     print(f"[INFO] Model uploaded to {s3_uri}")
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--sample", type=int, default=None, help="Number of rows to sample for quick tests")
+    parser.add_argument(
+        "--sample",
+        type=int,
+        default=None,
+        help="Number of rows to sample for quick tests",
+    )
     args = parser.parse_args()
     main(sample_size=args.sample)
