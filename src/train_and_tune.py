@@ -66,7 +66,7 @@ def main(sample_size=None):
     print(f"[INFO] Model uploaded to {s3_uri}")
 
 
-# test trigger for CI/CD
+# test trigger for
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
