@@ -1,0 +1,60 @@
+schema: '2.0'
+stages:
+  ingest:
+    cmd: python src/data_ingest.py
+    deps:
+    - path: data/raw/credit_risk_dataset.csv
+      hash: md5
+      md5: 9a01768113784fa109745fd8fe031eee
+      size: 1804682
+    - path: src/data_ingest.py
+      hash: md5
+      md5: 30281b0e06affaef3c43814e4d0fe9c8
+      size: 553
+    outs:
+    - path: data/staged/data.csv
+      hash: md5
+      md5: 9a01768113784fa109745fd8fe031eee
+      size: 1804682
+  validate:
+    cmd: python src/data_validation.py
+    deps:
+    - path: data/staged/data.csv
+      hash: md5
+      md5: 9a01768113784fa109745fd8fe031eee
+      size: 1804682
+    - path: src/data_validation.py
+      hash: md5
+      md5: d0a6d8dc27d696109b51986ef2656dbd
+      size: 499
+  train:
+    cmd: python src/train_and_tune.py
+    deps:
+    - path: data/staged/data.csv
+      hash: md5
+      md5: 9a01768113784fa109745fd8fe031eee
+      size: 1804682
+    - path: src/train_and_tune.py
+      hash: md5
+      md5: 8baf9153c8b4cc9aabc53b068219a441
+      size: 1146
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: cfae58da3f38588567e8c374cdc7ba15
+      size: 84991225
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - path: data/staged/data.csv
+      hash: md5
+      md5: 9a01768113784fa109745fd8fe031eee
+      size: 1804682
+    - path: models/model.pkl
+      hash: md5
+      md5: cfae58da3f38588567e8c374cdc7ba15
+      size: 84991225
+    - path: src/evaluate.py
+      hash: md5
+      md5: 33f50eaac1d424a95eb9dcc12f32b4cb
+      size: 744
