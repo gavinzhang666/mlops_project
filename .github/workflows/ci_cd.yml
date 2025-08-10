@@ -81,6 +81,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: Pull dataset from DVC remote
+        run: dvc pull data/raw/credit_risk_dataset.csv
+
       - name: Run DVC pipeline
         run: dvc repro
 
