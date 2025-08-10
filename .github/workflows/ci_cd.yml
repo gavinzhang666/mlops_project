@@ -110,4 +110,5 @@ jobs:
       - name: Update SageMaker endpoint
         env:
           SAGEMAKER_ROLE_ARN: ${{ secrets.SAGEMAKER_ROLE_ARN }}
+          ECR_IMAGE_URI: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/credit-risk-flask:latest
         run: python scripts/update_sagemaker_endpoint.py
